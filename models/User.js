@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from "bcryptjs"
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -17,5 +17,19 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
+// encrypt password
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+// Compare password method
+userSchema.methods.comparePassword = function (candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+};
 
 export const User = mongoose.models.User ?? mongoose.model("User", userSchema);

@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import notesRoutes from "./routes/noteRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import { auth } from "./middleware/auth.js";
 dotenv.config();
 const app = express();
 
@@ -13,7 +15,8 @@ app.use(express.json());
 app.use(cors());
 
 // ROUTES
-app.use("/notes",notesRoutes);
+app.use("/",authRoutes)
+app.use("/notes",auth,notesRoutes);
 
 mongoose
   .connect(DB_URL)

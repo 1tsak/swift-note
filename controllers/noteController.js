@@ -19,7 +19,6 @@ export const addNote = async (userId, note) => {
 };
 export const updateNote = async (id, updatedNote) => {
   try {
-    console.log(id)
     const note = await Note.findByIdAndUpdate(id, updatedNote);
     console.log(note)
     return note;

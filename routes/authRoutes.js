@@ -16,11 +16,11 @@ router.post("/login", async (req, res) => {
     if (!data) {
       return res
         .status(400)
-        .render("/auth/login", { error: "Invalid login credentials" });
+        .render("auth/login", { error: "Invalid login credentials" });
     }
     req.session.user = data.user;
     req.session.token = data.token;
-    return res.status(200).redirect("/notes");
+    return res.status(200).redirect("/");
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -30,9 +30,9 @@ router.post("/signup", async (req, res) => {
   try {
     const data = await signUp(email, password);
     if (!data) {
-      return res.status(400).json({ error: "User Already Exists!" });
+      return res.render("auth/signup",{ error: "User Already Exists!" });
     }
-    return res.status(200).redirect("/notes");
+    return res.status(200).redirect("/");
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notes</title>
+</head>
+<body>
+  <h1>Notes</h1>
+  <p>Hello, <%= user.email %>!</p>
+  <a href="/create">Add Note</a>
+  <ul>
+    <% notes.forEach(note => { %>
+      <li>
+        <h2><%= note.title %></h2>
+        <p><%= note.content %></p>
+        <a href="/edit/<%= note._id %>">Edit</a>
+        <form action="//delete/<%= note._id %>" method="POST" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+  <form action="/auth/signout" method="POST">
+    <button type="submit">Sign Out</button>
+  </form>
+</body>
+</html>

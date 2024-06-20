@@ -26,14 +26,14 @@ app.use(cors());
 // Session configuration
 app.use(session({
   secret: 'notesapp',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
   cookie: { secure: false }
 }));
 
 // ROUTES
 app.use("/auth",authRoutes)
-app.use("/notes",auth,notesRoutes);
+app.use("/",auth,notesRoutes);
 
 mongoose
   .connect(DB_URL)

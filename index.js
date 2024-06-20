@@ -1,21 +1,38 @@
 import express from "express";
+import session from 'express-session';
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import notesRoutes from "./routes/noteRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { auth } from "./middleware/auth.js";
+import path from "path"
 dotenv.config();
 const app = express();
 
 const PORT = process.env.PORT;
 const DB_URL = process.env.DB_URL;
+const __dirname = path.resolve();
 
+// Set view engine to EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+// Session configuration
+app.use(session({
+  secret: 'notesapp',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
 // ROUTES
-app.use("/",authRoutes)
+app.use("/auth",authRoutes)
 app.use("/notes",auth,notesRoutes);
 
 mongoose

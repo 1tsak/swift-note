@@ -10,8 +10,9 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
+    const { success_msg:message } = req.query;
     const notes = await getNotes(req.user.id);
-    res.render("notes", { notes, user: req.session.user });
+    res.render("notes", { notes, user: req.session.user,message });
   } catch (error) {
     res.status(500).render("notes", { error: error.message });
   }
@@ -25,7 +26,7 @@ router.post("/", async (req, res) => {
   const { note } = req.body;
   try {
     await addNote(req.user.id, note);
-    res.status(201).redirect("/");
+    res.redirect('/?success_msg=' + encodeURIComponent('Note Added!'));
   } catch (error) {
     res.status(500).render("notes/add", { error: error.message });
   }
@@ -51,7 +52,7 @@ router.post("/:noteId", async (req, res) => {
     if (!data) {
       return res.status(400).redirect("/");
     }
-    res.status(200).redirect("/");
+    res.redirect('/?success_msg=' + encodeURIComponent('Note Updated!'));
   } catch (error) {
     res.status(500).redirect("/");
   }
@@ -61,7 +62,7 @@ router.post("/delete/:noteId", async (req, res) => {
   try {
     const noteId = req.params.noteId;
     await deleteNote(noteId);
-    res.status(200).redirect("/");
+    res.redirect('/?success_msg=' + encodeURIComponent('Note Deleted!'));
   } catch (error) {
     res.status(500).redirect("/");
   }

@@ -116,6 +116,10 @@ ul li {
   grid-template-columns: auto 1fr;
   border-radius: 1rem;
   height: 150px;
+  transition: all 0.2s ease-in-out;
+}
+ul li:hover{
+  transform: scale(1.01);
 }
 .note-title {
   color: #2a2a2a;
@@ -240,4 +244,22 @@ textarea{
 }
 button{
   cursor: pointer;
+}
+.alert{
+  position: fixed;
+  right: -10%;
+  bottom: 5%;
+  background-color: #2a2a2a;
+  border-radius: 2rem;
+  padding: 0.75rem 2rem;
+  color:white;
+  transition: transform all 0.3s ease-in-out;
+  -webkit-animation: slide 0.3s normal;
+  -webkit-animation-delay: 0.3s;
+  animation: slide 0.3s forwards;
+  animation-delay: 0.3s;
+  transform: scale(0.5);
+}
+@-webkit-keyframes slide {
+  100% { right: 5%; transform: scale(1); }
 }

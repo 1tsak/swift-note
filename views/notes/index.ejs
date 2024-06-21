@@ -9,11 +9,26 @@
           event.preventDefault();
         }
       }
+      function hideAlert() {
+        removeQueryParams();
+        const alertElement = document.querySelector('.alert');
+        if (alertElement) {
+          setTimeout(() => {
+            alertElement.style.display = 'none';
+          }, 2000); 
+        }
+      }
+      function removeQueryParams() {
+        const url = new URL(window.location);
+        url.search = '';
+        window.history.replaceState({}, document.title, url);
+      }
+      window.onload = hideAlert;
     </script>
   </head>
   <body>
     <% if (typeof message !== 'undefined') { %>
-      <div class="alert">hey</div>
+      <div class="alert"><%=message%></div>
     <% } %>
     <header>
       <div class="user-icon"><p><%= user.email.substring(0,2) %></p></div>

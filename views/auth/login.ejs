@@ -3,6 +3,23 @@
   <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    <style>
+  
+    </style>
+    <script>
+      function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password");
+        const passwordToggle = document.getElementById("password-toggle");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          passwordToggle.textContent = "Hide";
+        } else {
+          passwordInput.type = "password";
+          passwordToggle.textContent = "Show";
+        }
+      }
+    </script>
   </head>
   <body>
     <header>
@@ -19,7 +36,7 @@
     <main>
       <div class="form-container">
         <p class="title">Login to continue</p>
-        <form action="/auth/login" method="POST">
+        <form action="/auth/login" method="POST" onsubmit="validateLoginForm(event)">
           <input
             type="email"
             id="email"
@@ -27,13 +44,16 @@
             name="email"
             required
           />
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            name="password"
-            required
-          />
+          <div class="password-container">
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              name="password"
+              required
+            />
+            <button type="button" id="password-toggle" class="password-toggle" onclick="togglePasswordVisibility()">Show</button>
+          </div>
           <button class="login" type="submit">Login</button>
         </form>
         <span>Don't have an account? </span><a href="/auth/signup">Sign Up</a>

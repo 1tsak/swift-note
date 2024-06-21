@@ -17,10 +17,17 @@ export const addNote = async (userId, note) => {
     throw error;
   }
 };
-export const updateNote = async (id, updatedNote) => {
+export const updateNote = async (uid, id, updatedNote) => {
   try {
-    const note = await Note.findByIdAndUpdate(id, updatedNote);
-    console.log(note)
+    const note = await Note.findOneAndUpdate(
+      { _id: id, userId: uid },
+      updatedNote,
+      { new: true }
+    );
+    if (!note) {
+      return null;
+    }
+
     return note;
   } catch (error) {
     throw error;

@@ -1,8 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="/style.css" />
+
+    <script>
+      function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+        const passwordToggle = document.getElementById("password-toggle");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          passwordToggle.textContent = "Hide";
+          confirmPasswordInput.type = "text";
+          confirmPasswordToggle.textContent = "Hide";
+        } else {
+          passwordInput.type = "password";
+          passwordToggle.textContent = "Show";
+          confirmPasswordInput.type = "password";
+          confirmPasswordToggle.textContent = "Show";
+        }
+      }
+    </script>
   </head>
   <body>
     <header>
@@ -19,9 +39,27 @@
     <main>
       <div class="form-container">
         <p class="title">Create an account!</p>
-        <form action="/auth/signup" method="POST">
+        <form action="/auth/signup" method="POST" onsubmit="validateSignupForm(event)">
           <input type="email" id="email" placeholder="Email" name="email" required />
-          <input type="password" id="password" placeholder="Password" name="password" required />
+          <div class="password-container">
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              name="password"
+              minlength="6"
+              required
+            />
+            <button type="button" id="password-toggle" class="password-toggle" onclick="togglePasswordVisibility()">Show</button>
+          </div>
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            name="confirmPassword"
+            minlength="6"
+            required
+          />
           <button class="login" type="submit">Sign Up</button>
         </form>
         <span>Already have an account? </span><a href="/auth/login">Log In</a>

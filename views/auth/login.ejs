@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Login</title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-</head>
-<body>
-  <h1>Login</h1>
-  <% if (typeof error !== 'undefined') { %>
-    <p style="color:red;"><%= error %></p>
-  <% } %>
-  <form action="/auth/login" method="POST">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <button type="submit">Login</button>
-  </form>
-  <a href="/auth/signup">Sign Up</a>
-</body>
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+        <h1>Swift Note</h1>
+        <span>Keep Your Notes Here!</span>
+      </div>
+    </header>
+    <div class="error-container">
+      <% if (typeof error !== 'undefined') { %>
+      <p class="error"><%= error %></p>
+      <% } %>
+    </div>
+    <main>
+      <div class="form-container">
+        <p class="title">Login to continue</p>
+        <form action="/auth/login" method="POST">
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            name="email"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            name="password"
+            required
+          />
+          <button class="login" type="submit">Login</button>
+        </form>
+        <span>Don't have an account? </span><a href="/auth/signup">Sign Up</a>
+      </div>
+    </main>
+  </body>
 </html>

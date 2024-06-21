@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Add Note</title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-</head>
-<body>
-  <h1>Add Note</h1>
-  <% if (typeof error !== 'undefined') { %>
-    <p style="color:red;"><%= error %></p>
-  <% } %>
-  <form action="/" method="POST">
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="note[title]" required>
-    <label for="content">Content:</label>
-    <textarea id="content" name="note[content]" required></textarea>
-    <button type="submit">Add Note</button>
-  </form>
-  <a href="/">Back to Notes</a>
-</body>
-</html>
+  <head>
+    <title>Add Note</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+        <h1>Swift Note</h1>
+        <span>Keep Your Notes Here!</span>
+      </div>
+    </header>
+    <main>
+
+      <% if (typeof error !== 'undefined') { %>
+        <p style="color: red"><%= error %></p>
+        <% } %>
+        <div class="form-container">
+          <p>Add a Note</p>
+          <form action="/" method="POST">
+            <input
+            type="text"
+            id="title"
+            name="note[title]"
+            placeholder="Title"
+            required
+            />
+            <textarea
+            id="content"
+            name="note[content]"
+            placeholder="content"
+            required
+            ></textarea>
+            <button class="note-action" type="submit">Add Note</button>
+          </form>
+        </div>
+        <a class="go-back" href="/">Back to Notes</a>
+      </main>
+      </body>
+      </html>
+      

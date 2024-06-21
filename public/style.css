@@ -187,7 +187,7 @@ ul li:hover {
   border-radius: 0.5rem;
 }
 .sep {
-  width: 80px;
+  width: 100px;
 }
 .user-icon {
   border-radius: 100%;
@@ -325,4 +325,13 @@ dialog {
   border: none;
   cursor: pointer;
   font-size: 0.8rem;
+}
+.no-notes{
+  color: #a5a5a5;
+  position: fixed;
+  left: 50%;
+  font-size: 0.8rem;
+  top: 45%;
+  font-weight: 500;
+  transform: translateX(-55%);
 }

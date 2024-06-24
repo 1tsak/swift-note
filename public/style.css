@@ -328,10 +328,17 @@ dialog {
 }
 .no-notes{
   color: #a5a5a5;
-  position: fixed;
+  position: absolute;
   left: 50%;
   font-size: 0.8rem;
   top: 45%;
   font-weight: 500;
   transform: translateX(-55%);
+}
+footer{
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 0.75rem;
+  color: #5f5f5f;
 }
